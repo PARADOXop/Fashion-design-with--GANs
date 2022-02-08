@@ -1,0 +1,82 @@
+***********************GANs*****************************************************************************************************************************************
+0. What is Generative Modeling?
+   Deep NN are mainly used for supervised problems. classification and regression. But Generative Modeling uses NN for very diff purpose.
+ This is a very interesting application of neural networks. Generative modeling is an unsupervised learning task in ML that involves 
+automatically discovering and learning the regularities or pattern in I/P data.
+
+********************************************************************************************************************************************
+1. What is Gans?
+ Generative Adversarial Networks belong to the set of generative models. It means that they are able to produce / to generate
+new content. GANs are a clever way to train generative model by framing the problem as supervised learning problem with two sub-model.
+One is generator and second is discriminator.
+
+
+
+Generative:  The Generator network is able to take random noise and map it into images such that the discriminator cannot tell 
+	which images came from the dataset and which images came from the generator.
+ 
+Adversarial: The training of a model is done in an adversarial setting.
+
+adversarial meaning: involving two people or two sides who oppose each other
+
+NOte: In our model generator and discriminator are adversarial.
+
+Networks: Use deep neural networks as the artificial intelligence (AI) algorithms for training purpose.
+
+**************************************************************************************************************************************************************************************
+
+2. What is Generator and Discriminator?
+    The Generator generates fake samples of data(be it an image, audio, etc.) and tries to fool the Discriminator. The Discriminator, 
+on the other hand, tries to distinguish between the real and fake samples. The Generator and the Discriminator are both Neural Networks 
+and they both run in competition with each other in the training phase. The steps are repeated several times and in this, the Generator
+and Discriminator get better and better in their respective jobs after each repetition.
+
+
+3. *******************************************************************************WORKING*******************************************************************************************************************
+
+-----forward propagation(for generation and classification)------Backward propagation(for Adversarial Trianing)
+
+
+INPUTS------------------>Generative Network------------------------>Discriminative network------------------------>Error metrix is the reference for the 
+														    evaluation of the model
+			This network is trained to Maximise	Use to trained to minimize the			   
+			the final classification error		The final Classification error
+
+Here, the generative model captures the distribution of data and is trained in such a manner that it tries to maximize the probability of the 
+Discriminator in making a mistake. The Discriminator, on the other hand, is based on a model that estimates the probability that the sample that 
+it got is received from the training data and not from the Generator.
+			 
+So, basically, training a GAN has two parts:
+
+Part 1: The Discriminator is trained while the Generator is idle. In this phase, the network is only forward propagated and no back-propagation is done. 
+The Discriminator is trained on real data for n epochs, and see if it can correctly predict them as real. Also, in this phase, the Discriminator is also
+trained on the fake generated data from the Generator and see if it can correctly predict them as fake.
+
+Part 2: The Generator is trained while the Discriminator is idle. After the Discriminator is trained by the generated fake data of the Generator, 
+we can get its predictions and use the results for training the Generator and get better from the previous state to try and fool the Discriminator.
+The above method is repeated for a few epochs and then manually check the fake data if it seems genuine. If it seems acceptable, then the training is 
+stopped, otherwise, its allowed to continue for few more epochs.
+
+
+*******************************************************************************************************************************************************************************
+
+4. Different types of GANs:
+GANs are now a very active topic of research and there have been many different types of GAN implementation. Some of the important ones that are actively being used currently are described below:
+
+1. Vanilla GAN: This is the simplest type GAN. Here, the Generator and the Discriminator are simple multi-layer perceptrons. In vanilla GAN, the algorithm is really simple, it tries to 
+optimize the mathematical equation using stochastic gradient descent.
+
+2. Conditional GAN (CGAN): CGAN can be described as a deep learning method in which some conditional parameters are put into place. In CGAN, an additional parameter ‘y’ 
+is added to the Generator for generating the corresponding data. Labels are also put into the input to the Discriminator in order for the Discriminator 
+to help distinguish the real data from the fake generated data.
+
+3. Deep Convolutional GAN (DCGAN): DCGAN is one of the most popular also the most successful implementation of GAN. It is composed of ConvNets in place of multi-layer perceptrons. 
+The ConvNets are implemented without max pooling, which is in fact replaced by convolutional stride. Also, the layers are not fully connected.
+
+4. Laplacian Pyramid GAN (LAPGAN): The Laplacian pyramid is a linear invertible image representation consisting of a set of band-pass images, spaced an octave apart, plus a low-frequency 
+residual. This approach uses multiple numbers of Generator and Discriminator networks and different levels of the Laplacian Pyramid. This approach is mainly used because it produces very 
+high-quality images. The image is down-sampled at first at each layer of the pyramid and then it is again up-scaled at each layer in a backward pass where the image acquires some noise 
+from the Conditional GAN at these layers until it reaches its original size.
+
+5. Super Resolution GAN (SRGAN): SRGAN as the name suggests is a way of designing a GAN in which a deep neural network is used along with an adversarial network in order to produce higher 
+resolution images. This type of GAN is particularly useful in optimally up-scaling native low-resolution images to enhance its details minimizing errors while doing so.
